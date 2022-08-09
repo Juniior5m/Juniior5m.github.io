@@ -1,0 +1,108 @@
+<html>
+  <head>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="ansokan.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/apply.css">
+    <title>Nightlife - Whitelist ansökan</title>
+  </head>
+  <body class="container mt-5">
+    <form onsubmit="sendContact(event)">
+      <div class="mb-3">
+        <label for="emailInput" class="form-label">Vad heter du på discord? (Med #. Tex nightlife#0000):</label>
+        <input type="name" class="form-control" id="emailInput">
+      </div>
+      <div class="mb-3">
+        <label for="messageInput" class="form-label">Vad heter du?: </label>
+        <textarea class="form-control" id="messageInput" rows="1"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="messageInput1" class="form-label">Ålder:</label>
+        <textarea class="form-control" id="messageInput1" rows="3"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="messageInput2" class="form-label">Berätta om din karaktär:</label>
+        <textarea class="form-control" id="messageInput2" rows="7"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="messageInput3" class="form-label">Berätta om dig själv:</label>
+        <textarea class="form-control" id="messageInput3" rows="3"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="messageInput4" class="form-label">Vad kommer du bidra med?:</label>
+        <textarea class="form-control" id="messageInput4" rows="3"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="messageInput5" class="form-label">Kan du alla regler (Ja/Nej):</label>
+        <textarea class="form-control" id="messageInput5" rows="3"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="messageInput6" class="form-label">Varför valde du denna server?:</label>
+        <textarea class="form-control" id="messageInput6" rows="3"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="messageInput7" class="form-label">Kommer detta vara din "main" server?:</label>
+        <textarea class="form-control" id="messageInput7" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Lämna in</button>
+    </form>
+    <script>
+      async function sendContact(ev) {
+        ev.preventDefault();
+
+        const senderEmail = document
+          .getElementById('emailInput').value;
+        const senderMessage = document
+          .getElementById('messageInput').value;
+          const senderMessage1 = document
+          .getElementById('messageInput1').value;
+          const senderMessage2 = document
+          .getElementById('messageInput2').value;
+          const senderMessage3 = document
+          .getElementById('messageInput3').value;
+          const senderMessage4 = document
+          .getElementById('messageInput4').value;
+          const senderMessage5 = document
+          .getElementById('messageInput5').value;
+          const senderMessage6 = document
+          .getElementById('messageInput6').value;
+          const senderMessage7 = document
+          .getElementById('messageInput7').value;
+
+        const webhookBody = {
+          embeds: [{
+            title: 'Whitelist ansökan',
+            fields: [
+              { name: 'Discord:', value: senderEmail },
+              { name: 'Personens namn:', value: senderMessage },
+              { name: 'Ålder:', value: senderMessage1 },
+              { name: 'Karaktärs beskrivning:', value: senderMessage2 },
+              { name: 'Peron beskrivning:', value: senderMessage3 },
+              { name: 'Vad hen kommer bidra med:', value: senderMessage4 },
+              { name: 'Kan hen reglerna?:', value: senderMessage5 },
+              { name: 'Varför hen valde denna server:', value: senderMessage6 },
+              { name: 'Är detta hens main server:', value: senderMessage7 }
+            ]
+          }],
+        };
+
+        const webhookUrl = 'https://discord.com/api/webhooks/1003392352695623740/TtRPMyeoH_NkjiUiUrCPg_cFhTmzdNOEaynVChK0fipM19sHEbiUlSQEIyqTKNN6Ecv1';
+
+        const response = await fetch(webhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(webhookBody),
+        });
+
+        if (response.ok) {
+          alert('Ansökan inlämnad!');
+        } else {
+          alert('ERROR | Någonting blev fel. Försök igen senare. :)');
+        }
+      }
+    </script>
+  </body>
+</html>
